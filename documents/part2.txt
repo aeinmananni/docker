@@ -69,3 +69,345 @@ history :
               var : فایل هایی که مرتبا اپدیت میشود قرار میگیرد
               proc : شامل فایل هایی که برای اجرا پراسس ها داستفاده میشود
               
+------------------------------------------------------------------------------------
+  اولین تایپی که برای لبینوکس داریم
+  pwd : print working directory
+         با این کامند میتوانیم متوجه شویم کجای فایل سیستم قرار داریم
+        
+ ls : 
+      درجایی که هستیم چه فایل ها و یا دایرکتوری هایی وجود دارد
+      (bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var)
+
+      به صورت کامند لیست رو در چند فایل به ما برمیگرداند
+    
+ ls -1 : 
+          حالا اگر بخواهیم در یک لاین اطلاعات را به ما برگرداند    
+
+ls -l : 
+        اطلاعات کامل تری را از هر فایل یا دایرکتوری به ما برمیگرداند
+
+
+    1                2            3                 4
+      
+lrwxrwxrwx     1  root root      7         Apr 22  2024 bin -> usr/bin
+drwxr-xr-x     2  root root      4096     Apr 22  2024 boot
+drwxr-xr-x     5  root root      360      Sep  7 04:51 dev
+drwxr-xr-x     1  root root      4096     Sep  7 04:51 etc
+drwxr-xr-x     3  root root      4096     Aug  5 02:14 home
+lrwxrwxrwx     1  root root         7     Apr 22  2024 lib -> usr/lib
+lrwxrwxrwx     1  root root         9     Apr 22  2024 lib64 -> usr/lib64
+drwxr-xr-x     2  root root      4096     Aug  5 02:07 media
+drwxr-xr-x     2  root root      4096     Aug  5 02:07 mnt
+drwxr-xr-x     2  root root      4096     Aug  5 02:07 opt
+dr-xr-xr-x   219  root root         0     Sep  7 04:51 proc
+drwx------     2  root root      4096     Aug  5 02:14 root
+drwxr-xr-x     4  root root      4096     Aug  5 02:14 run
+lrwxrwxrwx     1  root root         8     Apr 22  2024 sbin -> usr/sbin
+drwxr-xr-x     2  root root      4096     Aug  5 02:07 srv
+dr-xr-xr-x     3  root root         0     Sep  7 04:51 sys
+drwxrwxrwt     2  root root      4096     Aug  5 02:14 tmp
+drwxr-xr-x     2  root root      4096     Aug  5 02:07 usr
+drwxr-xr-x     1  root root      4096     Aug  5 02:14 var    
+
+
+ستون 1 : 
+          قرار دارد premission  هرفایل یا دایرکتوری که داریم در کنار ان یک  
+
+ ستون 2 : 
+            فایل قرار دارد owner          
+
+  ستون 3 : 
+           حجم فایل ها قرار دارد
+ 
+ ستون 4 : 
+          تاریخی که ایجاد شده اند
+--------------------------------------------------------
+
+      برای اینکه در دایرکتوری که درون ان هستیم به جای دیگری برویم
+      برای اینکار میتوانیم از دونوع ادرس دهی استفاده کنیم
+
+      1- relative address (نسبی): 
+                                 یعنی نسبت به جایی که الان هستیم relative  ادرس 
+                                 برای مثال مثلا در دایرکتوری روت هستیم و فولدر های 
+                                 دیگری را نیز داریم یعنی اگر من این دستور را وارد کنم
+                                 cd bin : 
+                                         بگرد  bin  یعنی از جایی که هستیم دنبال دایرکتوری 
+                                         وبه ان دایرکتوری واردشو این نوع ادرس دهی زمانی 
+                                         بدرد میخورد که ما توی روت پدر باشم واگر درمسیر
+                                         دیگری بودیم نمیتوانتسیم به صورت نسبی به ان وارد شویم
+                                         پس میتوانیم از ادرس دهی مطلق استفاده کنیم
+
+                                         
+                                         
+
+
+      2- absolute address (مطلق) : 
+                                   همه ادرس های مطلق با اسلش شروع میشوند 
+                                   cd /etc : 
+                                             این ادرس به ما میگوید اول به دایرکتوری روت برو
+                                             /etc و بعد دایرکتوری 
+                                             root@f888ba0c0189:/# cd /etc
+                                             root@f888ba0c0189:/etc# 
+                                             مبینیم بعد از وراد شدن به ادرس ادرس روت تغییر کرد
+                                             درواقع دیگر مهم نیست در کجا هستیم و داریم این کامند را اجرا میکنیم
+                                            ها absolute مثال دیگری برای کاربا : 
+                                                                              root@f888ba0c0189:/# cd /etc/apt
+                                                                              root@f888ba0c0189:/etc/apt#
+
+   تمرین : 
+          میخواهیم بدانیم در این دایرکتوری چه فایل ها و یا فولدر هایی وجود دارند     
+
+          root@f888ba0c0189:/# cd /etc/apt
+          root@f888ba0c0189:/etc/apt# ls
+
+            apt.conf.d  auth.conf.d  keyrings  preferences.d  sources.list  sources.list.d  trusted.gpg.d
+   cd .. : 
+           برای برگشتن به دایرکتوری بالاتر (یک پوشه عقب‌تر)
+   cd /  : 
+             (root directory) اگر بخوای مستقیم به ریشه  برگردی
+   cd ~  : 
+            home یا اگر بخوای مستقیم بری به 
+        
+ ----------------------------------------------------------------------
+   خب حالا از جایی که قرار داریم میخواهیم بدون این که به دایرکتوری دیگری برویم
+   بتوانیم محتوای ان را ببنیم:
+                               وارد کنیم absolute را با یک ادرس  ls  میتوانیم دستور 
+                                ls /bin
+ =>
+     root@f888ba0c0189:~# ls /bin
+'['                       dpkg                      linux32            prlimit             tee
+ addpart                  dpkg-deb                  linux64            ps                  tempfile
+ apt                      dpkg-divert               ln                 ptx                 test
+ apt-cache                dpkg-maintscript-helper   locale             pwd                 tic
+ apt-cdrom                dpkg-query                locale-check       pwdx                timeout
+ apt-config               dpkg-realpath             localedef          rbash               tload
+ apt-get                  dpkg-split                logger             readlink            toe
+ apt-key                  dpkg-statoverride         login              realpath            top
+ apt-mark                 dpkg-trigger              logname            rename.ul           touch
+ arch                     du                        ls                 renice              tput
+ awk                      echo                      lsattr             reset               tr
+ b2sum                    egrep                     lsblk              resizepart          true
+ base32                   env                       lscpu              rev                 truncate
+ base64                   expand                    lsipc              rgrep               tset
+ basename                 expiry                    lslocks            rm                  tsort
+ basenc                   expr                      lslogins           rmdir               tty
+ bash                     factor                    lsmem              run-parts           tzselect
+ bashbug                  faillog                   lsns               runcon              uclampset
+ captoinfo                fallocate                 man                savelog             umount
+ cat                      false                     mawk               script              uname
+ chage                    fgrep                     mcookie            scriptlive          uncompress
+ chattr                   find                      md5sum             scriptreplay        unexpand
+ chcon                    findmnt                   md5sum.textutils   sdiff               uniq
+ chfn                     flock                     mesg               sed                 unlink
+ chgrp                    fmt                       mkdir              select-editor       unminimize
+ chmod                    fold                      mkfifo             sensible-browser    unshare
+ choom                    free                      mknod              sensible-editor     update-alternatives
+ chown                    getconf                   mktemp             sensible-pager      uptime
+ chrt                     getent                    more               sensible-terminal   users
+ chsh                     getopt                    mount              seq                 utmpdump
+ cksum                    gpasswd                   mountpoint         setarch             vdir
+ clear                    gpgv                      mv                 setpriv             vmstat
+ clear_console            grep                      namei              setsid              w
+ cmp                      groups                    nawk               setterm             wall
+ comm                     gunzip                    newgrp             sg                  watch
+ cp                       gzexe                     nice               sh                  wc
+ csplit                   gzip                      nisdomainname      sha1sum             wdctl
+ cut                      hardlink                  nl                 sha224sum           whereis
+ dash                     head                      nohup              sha256sum           which
+ date                     hostid                    nproc              sha384sum           which.debianutils
+ dd                       hostname                  nsenter            sha512sum           who
+ deb-systemd-helper       i386                      numfmt             shred               whoami
+ deb-systemd-invoke       iconv                     od                 shuf                x86_64
+ debconf                  id                        pager              skill               xargs
+ debconf-apt-progress     infocmp                   partx              slabtop             yes
+ debconf-communicate      infotocap                 passwd             sleep               ypdomainname
+ debconf-copydb           install                   paste              snice               zcat
+ debconf-escape           ionice                    pathchk            sort                zcmp
+ debconf-set-selections   ipcmk                     perl               split               zdiff
+ debconf-show             ipcrm                     perl5.38.2         stat                zdump
+ delpart                  ipcs                      pgrep              stdbuf              zegrep
+ df                       ischroot                  pidof              stty                zfgrep
+ diff                     join                      pidwait            su                  zforce
+ diff3                    kill                      pinky              sum                 zgrep
+ dir                      last                      pkill              sync                zless
+ dircolors                lastb                     pldd               tabs                zmore
+ dirname                  lastlog                   pmap               tac                 znew
+ dmesg                    ld.so                     pr                 tail
+ dnsdomainname            ldd                       printenv           tar
+ domainname               link                      printf             taskset
+ ---------------------------------------------------------------------------------------------------
+    
+    دارد homeDirectory  یک user هر : 
+                                     root مخصوص دارد بنام  homeDirectory  هر کاربر یک 
+                                     میتوانیم با ادرس های مطلق و یا نسبی درون ان وارد شویم
+                                     cd /root یا cd root
+                                      یا میتوانیم به این صورت به دایرکتوری برویم
+                                      cd ~ => (Tilde ~)
+ ---------------------------------------------------------------------------------------------
+
+  mkdir : 
+          میتوانیم یک دایرکتوری جدید ایجاد کنیم
+          دایرکتوری ها بارنگ ابی نمایش داده می شوند
+
+root@f888ba0c0189:~# mkdir test
+root@f888ba0c0189:~# ls
+test
+
+ - - - - - 
+
+ mv :
+   میتوانیم اسم فایل ها و فولدر های خودمون رو تغییر بدیم
+   و همچینین میتونیم به جای دیگه ای جابه جاش کنیم
+
+           فایل جدید      فایل قدیمی
+      mv      test        docker-project
+
+   root@f888ba0c0189:~# mv test docker-project
+   ot@f888ba0c0189:~# ls
+   docker-project
+   ot@f888ba0c0189:~#
+
+- - - - - - 
+   خب حالا وارد فولدری که ساختیم میشویم
+
+   touch : 
+         میتوانیم یک فایل جدید بسازیم
+ 
+    root@f888ba0c0189:~# cd docker-project
+    root@f888ba0c0189:~/docker-project# touch hello.txt
+    root@f888ba0c0189:~/docker-project# ls
+    hello.txt
+    root@f888ba0c0189:~/docker-project#
+
+    خب میتوانیم توسط این دستور چند فایل را بطور همزمان بسازیم
+
+    root@f888ba0c0189:~/docker-project# touch file1.txt file2.txt file3.txt
+    root@f888ba0c0189:~/docker-project# ls
+    file1.txt  file2.txt  file3.txt  hello.txt
+
+    خب حالا برای مثال میتوانیم نام فایل را نیز تغییر دهیم
+    root@f888ba0c0189:~/docker-project# mv hello.txt hello-docker.txt
+    root@f888ba0c0189:~/docker-project# ls
+    file1.txt  file2.txt  file3.txt  hello-docker.txt
+     - - - - - - - - 
+     خب حالا میخواهیم بتوانیم یک یا چند فایل را حذف کنیم
+     rm file1.txt اولین روش
+     یا میتوانیم به صورت یک الگو عمل کنیم مثال بگوییم اونایی که
+     اولش فایل باشه 
+     rm file*
+
+     root@f888ba0c0189:~/docker-project# rm file*
+     root@f888ba0c0189:~/docker-project# ls
+     hello-docker.txt
+
+     - - - - - - - - - - - - 
+     به چه صورتی میتوانیم یک دایرکتوری را پا کنیم
+
+     rm -r filder-name/ : 
+                         با این دستور میگوییم هر فولدری با ین نام وجود دارد
+                         و فایل های درون ان حذف شود
+
+    root@f888ba0c0189:~# rm -r docker-project
+    root@f888ba0c0189:~# ls
+
+   -------------------------------------------------------------------------------------------------- 
+   خب حالا میخواهیم ببنیم چگونه میتوانیم فایل های خود را ادیت کنیم
+    را نصب کنیم nano ابتدا باید  
+    یک تکس ادیتور است که برای لینوکس ساخته شده است
+    توسط این دستور ابتدا ریپازیتوری هارا اپدیت میکنیم
+
+    root@f888ba0c0189:~# apt update
+    
+      Get:1 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+      Get:2 http://archive.ubuntu.com/ubuntu noble InRelease [256 kB]
+      Get:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+      Get:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+      Get:5 http://archive.ubuntu.com/ubuntu noble/restricted amd64 Packages [117 kB]
+      Ign:6 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages
+      Ign:7 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages
+      15% [Waiting for headers] [Waiting for headers]
+
+     را نصب کنیم nano بعد بااین فلگ میتوانیم 
+     apt-get install -y nano --fix-missing
+
+     - - - - - - - - - - - - -
+     خب مجدد برای نصب به شمکل خوردم و مجبور شدم این ایمج رو دانلود کنم
+     docker run -it ubuntu:22.04
+
+     root@49d58ddb38c5:/# apt update
+Err:1 http://security.ubuntu.com/ubuntu jammy-security InRelease
+  500  writing response to security.ubuntu.com:80: reading HTTP GET: unexpected EOF [IP: 185.125.190.82 80]
+   Get:2 http://archive.ubuntu.com/ubuntu jammy InRelease [270 kB]
+   Get:3 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
+   Get:4 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [127 kB]
+   Ign:5 http://archive.ubuntu.com/ubuntu jammy/multiverse amd64 Packages
+   Ign:6 http://archive.ubuntu.com/ubuntu jammy/main amd64 Packages
+   Ign:7 http://archive.ubuntu.com/ubuntu jammy/restricted amd64 Packages
+   Ign:8 http://archive.ubuntu.com/ubuntu jammy/universe amd64 Packages
+   Ign:9 http://archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages
+   Ign:10 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages
+   13% [Waiting for headers]
+     - - - - - - - - - - - - -
+
+
+   در نهایت اگر به مشکل اینترنت خوردم باید فیلتر شکن رو قطع کنیم و این دستورات رو دوباره
+   تکرار کنم
+   
+   apt update
+    apt install -y nano
+    -----------------------------------------
+       ایجاد میکنیم 
+   اگر فایل برای ما وجود نداشته باشد nano  خب دستوراتی که با 
+   ابتدا ان را میسازد و بعد میتوانیم وارد ان شویم
+
+   خب این دستور را میزنیم و این فایل برای ما باز میشود
+   nano file1.txt
+   درون ان چیزی مینویسیم و میبینیم در پایین شرت کات هارا به ما نمایش میدهد
+   ^G Help    
+   ^O Write Out
+   ^W Where Is    
+   ^K Cut         
+   ^T Execute     
+   ^C Location    
+   M-U Undo       
+   M-A Set Mark
+   ^X Exit        
+   ^R Read File   
+   ^\ Replace     
+   ^U Paste       
+   ^J Justify     
+   ^/ Go To Line 
+   M-E Redo      
+   M-6 Copy
+
+   ctrl + X : 
+              میتوانیم از فایل خارج شویم
+ ----------------------------------------------------
+ خب حالا میخواهیم محتوای این فایل را بخوانیم:
+                                                          
+         1- nano file_name : 
+                           میتوانیم فایل را بخوانیم
+         2- cat file1.txt : 
+                            توسط این روش نیز میتوانیم محتوای فایل را بخوانیم
+                            برای ادقام کردن دوفایل نیز از این کد استفاده میکنیم
+                            cat 
+                            این برای زمانی مناسب است که محتوای فایل ما کم باشد
+         3- more : 
+                  برای زمانی که محتوای فایل طولانی است
+                  درواقع این فایل را به صورت پیج پیج به ما نمایش میدهد
+                root@4dfb349a0b97:/# more file1.txt
+               hello docker projects
+         4-less : 
+                    apt install less اگر این را نصب کنیم 
+                    میتوانیم فایل را علاوه بر خواندن 
+                    خط به خط بین لاین ها حرکت کنیم
+         5- head : 
+                   بااستفاده از هد میتوانیم چند لاین ابتدایی را
+                   بخوانیم میتوانیم مشخص کنیم چند لاین
+                   اول را میخواهیم
+                   head -n 5          
+        6- tail : 
+                       میتوانیم چند لاین انتهایی را
+                   بخوانیم میتوانیم مشخص کنیم چند لاین
+                   اول را میخواهیم
+                   tail -n 5         
