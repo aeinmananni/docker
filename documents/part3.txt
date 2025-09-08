@@ -1,0 +1,106 @@
+
+نمایش کانتینر های درحال اجرا : 
+                               docker ps
+
+C:\Users\DELL>docker ps
+CONTAINER ID   IMAGE          COMMAND       CREATED        STATUS        PORTS     NAMES
+4dfb349a0b97   ubuntu         "/bin/bash"   24 hours ago   Up 24 hours             hopeful_hellman
+49d58ddb38c5   ubuntu:22.04   "/bin/bash"   24 hours ago   Up 24 hours             dreamy_hertz
+fc75fedd70a9   ubuntu         "/bin/bash"   25 hours ago   Up 25 hours             tender_napier
+44632dce2c2c   ubuntu         "/bin/bash"   25 hours ago   Up 25 hours             upbeat_allen
+cda92afdaa7b   ubuntu         "/bin/bash"   25 hours ago   Up 25 hours             angry_chebyshev
+f888ba0c0189   ubuntu         "/bin/bash"   26 hours ago   Up 26 hours             brave_tesla
+f6b4cad3f091   ubuntu         "/bin/bash"   26 hours ago   Up 26 hours             vigorous_keldysh
+
+این دورا باهم اشتباه نگیریم  container داریم و یکسری image  مایکسری 
+ ساختیم image  از روی container در واقع 
+
+---- - - - - - - - 
+
+هایی که وجود دارد image نمایش لیست : 
+                                    docker image ls    
+
+REPOSITORY                      TAG       IMAGE ID       CREATED       SIZE
+aeinmannani/docker-production   latest    86fc67926132   4 days ago    213MB
+docker-production               latest    86fc67926132   4 days ago    213MB
+ubuntu                          22.04     b1dc6972547a   2 weeks ago   77.9MB
+ubuntu  
+
+---- - - - - - - -
+
+    برای نمایش کانتتینر های استاپ شده : 
+                                       docker ps -a
+
+    اگر بخواهیم با همان کانتینری که ساختیم کار کنیم  : 
+                                      docker start -i f6b4c => قرار دادن 5 کلمه اول ادرس کانتینر کافی است
+
+                     برای حذف کانتینر : 
+                                      docker rm my-container
+   
+   حذف کانتینر در حال اجرا (با توقف اجباری) : 
+                                           docker rm -f $(docker ps -aq)
+----------------------------------------------------------------------------------
+یکی از مفاهیم مهم در داکر این  :
+
+ standard input , standardoutput
+  
+        standard input : همون کیبورد ما است
+        standard output : همون اسکرین ما است
+
+        نکته : 
+               ما میتوانیم این دوتارو تغییر بدیم
+               و به این کار ریدایرکشن میگویند
+
+         cat <fileName> : 
+                          خب مبخواهبم محتوای فایل را ببینیم
+                         درواقع زمانی که اینکار را اناجم میدهیم
+                         خروجی در استاندارد اوت پوت ما نمایش داده میشود
+
+       cat file1.txt > file2.txt : 
+                                    بااین روش میتوانیم خروجی را به جای اسکرین
+                                    توی فایل دیگر نمایش دهیم ودرواقع برای ما
+                                    این فایل را کپی کرده
+
+------ - - - - - 
+ خب حالا میخواهیم محتوای دوفایل را باهم ترکیب کنیم
+  cat توسط دستور 
+
+   cat fil1.txt filw2.txt: 
+                          خروجی هردورا برای ما چاپ میکند
+
+  cat file1.txt filw2.txt > conbined.txt : 
+                                          خروجی این دوفایل رو داخل یک فایل
+                                          جدید ذخیره میکنیم                          
+  میتوانیم < در هرجایی که میخواهیم استفاده کنیم
+
+  ---------- - - - - - - -                                        
+  خب میتوانیم حتی با این دستور نیز مقداری را به فایل اضافه کنیم
+  باید دقت کنیم اضافه کردن محتوایی به فایل باعث از بین رفتن اطلاعات قبلی میشود
+         echo Hello my firind > file1.txt
+
+ ----------- - - - - -
+         ls -l /etc : 
+                      خب حالا میخواهیم با این دستور محتوای درون این فایل را بخوانیم
+                      drwxr-xr-x 1 root root    4096 Sep  8 07:20 alternatives
+drwxr-xr-x 8 root root    4096 Aug  5 02:07 apt
+-rw-r--r-- 1 root root    2319 Mar 31  2024 bash.bashrc
+-rw-r--r-- 1 root root     367 Aug  2  2022 bindresvport.blacklist
+drwxr-xr-x 2 root root    4096 Aug  5 02:14 cloud
+drwxr-xr-x 2 root root    4096 Aug  5 02:14 cron.d
+drwxr-xr-x 2 root root    4096 Aug  5 02:14 cron.daily
+-rw-r--r-- 1 root root    2967 Apr 12  2024 debconf.conf
+-rw-r--r-- 1 root root      11 Apr 22  2024 debian_version
+drwxr-xr-x 2 root root    4096 Aug  5 02:14 default
+drwxr-xr-x 4 root root    4096 Aug  5 02:14 dpkg
+-rw-r--r-- 1 root root     685 Apr  8  2024 e2scrub.conf
+-rw-r--r-- 1 root root     106 Aug  5 02:07 environment
+-rw-r--r-- 1 root root      37 Aug  5 02:07 fstab
+-rw-r--r-- 1 root root    2584 Jan 31  2024 gai.conf
+drwxr-xr-x 2 root root    4096 Aug  5 02:14 gnutls
+-rw-r--r-- 1 root root     503 Aug  5 02:14 group
+-rw-r--r-- 1 root root     434 Aug  5 02:07 group-
+.....
+
+ls -l /etc > files_overview.txt : 
+                                    با این دستور میتوانیم اطلاعات این پوشه را درفایل دیگری بنویسیم
+                                    
