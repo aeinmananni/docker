@@ -387,3 +387,110 @@ _=/usr/bin/printenv
        16 pts/0    00:00:00 ps
        [1]+  Terminated              sleep 100
        root@f6b4cad3f091:/#
+
+---------------------------------------------
+       نکته : 
+               useradd درلینوکس کامندی داریم بنام 
+               که میتوانیم توسط این دستور یک کاربر
+               ایجاد کنیم
+
+               usermod : میتوانیم یک کاربررا ویرایش کنیم
+               userdel : میتوانیم یک کاربر را حذف کنیم
+
+
+               useradd -m ayin : دایرکتوری برای ما ایجاد میکندhome  یک  -m
+
+               نکته : 
+                    ذخیره شده است etc  این کاربری که ایجاد کردیم در فایل 
+
+               root@e6544d1c2641:/# useradd -m ayin
+
+                     root@e6544d1c2641:/# cat /etc/password
+                     cat: /etc/password: No such file or directory
+                     root@e6544d1c2641:/# cat /etc/passwd
+                     root:x:0:0:root:/root:/bin/bash
+                     daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+                     bin:x:2:2:bin:/bin:/usr/sbin/nologin
+                     sys:x:3:3:sys:/dev:/usr/sbin/nologin
+                     sync:x:4:65534:sync:/bin:/bin/sync
+                     games:x:5:60:games:/usr/games:/usr/sbin/nologin
+                     man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+                     lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+                     mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+                     news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+                     uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+                     proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+                     www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+                     backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+                     list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+                     irc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin
+                     _apt:x:42:65534::/nonexistent:/usr/sbin/nologin
+                     nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+                     ubuntu:x:1000:1000:Ubuntu:/home/ubuntu:/bin/bash
+                     ayin:x:1001:1001::/home/ayin:/bin/sh
+
+              نکته : 
+                     این یوزر ایجاد شده از چند بخش تشکیل شده است
+
+                     ayin:x:1001:1001::/home/ayin:/bin/sh
+
+                     1- ayin : یوزر نام کاربری است که ایجاد کردیم
+
+                     2- x : پسورد این کاربر در جای دیگری ذخیره شده است
+
+                     3- 1001 : ID
+
+                     4- 1001 : groupId
+
+                     5- home :  دایرکتوری کاربرhome
+
+                     6- /bin/sh : برنامه شلی که این کاربر در حین لاگین استفاده میکند را داریم
+
+------------ - - - - - - -
+ استفاده کنیمbash  خب حالا میخواهیم وقتی لاگین میکنیم به جای استفاده از برنامه شل از 
+
+          usermod -s /bin/bash ayin : 
+                                       -s میخوایم شل رو تغییر بدیم
+
+         خب حالا میخواهیم پسورد را پیدا کنیم : 
+
+       root@e6544d1c2641:/# cat /etc/shadow =>
+                                          root:*:20305:0:99999:7:::
+                                          daemon:*:20305:0:99999:7:::
+                                          bin:*:20305:0:99999:7:::
+                                          sys:*:20305:0:99999:7:::
+                                          sync:*:20305:0:99999:7:::
+                                          games:*:20305:0:99999:7:::
+                                          man:*:20305:0:99999:7:::
+                                          lp:*:20305:0:99999:7:::
+                                          mail:*:20305:0:99999:7:::
+                                          news:*:20305:0:99999:7:::
+                                          uucp:*:20305:0:99999:7:::
+                                          proxy:*:20305:0:99999:7:::
+                                          www-data:*:20305:0:99999:7:::
+                                          backup:*:20305:0:99999:7:::
+                                          list:*:20305:0:99999:7:::
+                                          irc:*:20305:0:99999:7:::
+                                          _apt:*:20305:0:99999:7:::
+                                          nobody:*:20305:0:99999:7:::
+                                          ubuntu:!:20305:0:99999:7:::
+                                          ayin:!:20346:0:99999:7:::                                 
+
+-----------------------------------------------------------
+خب حالا میخواهیم به عنوان کاربر وارد شویم : 
+
+     1- کانتینر مورد نظر رو روشن میکنیم : 
+                                     docker start -ai e6544d1c2641cde601116079a80af51b0c5f48de7a1124cf6420ec5ebc69f1fe
+
+     2- و سپس این رو وارد میکنم : 
+                                  docker exec -it -u ayin e6544d1c2641cde601116079a80af51b0c5f48de7a1124cf6420ec5ebc69f1fe bash
+                                                                                                                   
+
+----------------------------------------------------------
+خب کامند دیگری داریم بنام  adduser : 
+adduser , useradd تفاوت این دو دستور درچیست :
+                               
+                               1- useradd : از ای پی ای اولی است که یوزر را ایجاد میکنید
+                               2- adduser:تعامل بیشتری ایجاد میکند 
+
+                               
