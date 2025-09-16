@@ -400,12 +400,19 @@ _=/usr/bin/printenv
 
                useradd -m ayin : دایرکتوری برای ما ایجاد میکندhome  یک  -m
 
-               نکته : 
+               برای شماهده اطلاعات کاربرایجاد شده  : 
+                                                      root@b9aa3fdc6bfd:/# id ayin
+                                                        uid=1001(ayin) gid=1002(ayin) groups=1002(ayin)
+
+                                                        root@b9aa3fdc6bfd:/# getent passwd ayin
+                                                        ayin:x:1001:1002::/home/ayin:/bin/sh
+               نکته :         
                     ذخیره شده است etc  این کاربری که ایجاد کردیم در فایل 
 
                root@e6544d1c2641:/# useradd -m ayin
 
                      root@e6544d1c2641:/# cat /etc/password
+
                      cat: /etc/password: No such file or directory
                      root@e6544d1c2641:/# cat /etc/passwd
                      root:x:0:0:root:/root:/bin/bash
@@ -493,4 +500,121 @@ adduser , useradd تفاوت این دو دستور درچیست :
                                1- useradd : از ای پی ای اولی است که یوزر را ایجاد میکنید
                                2- adduser:تعامل بیشتری ایجاد میکند 
 
-                               
+
+-----------------------------------------------------Groups-------------------------------------------------------------
+                       
+                       سه کامند داریم : 
+                                       1- groupadd
+                                       2- groupmod
+                                       3- groupdel
+   نکته : 
+          کارمدیریت گروه هارا انجام میدهدند
+                     
+                     groupadd developers : 
+                                            نحوه ایجادکردن یک گروه
+    نکته : 
+           چرا گروه میسازیم و کاربر هارا به ان اضافه میکنیم ؟
+
+              هدف از گروه بندی کاربران این است کاربرهایی
+              permission که دریک گروه مشترک هستند 
+              های یکسانی داشته باشند یعنی کاربرانی را
+               developers ایجاد میکنیم و میگوییم گروه 
+               میتواند اختیاراتی داشته باشند
+               developers در نتیجه اگر کاربری عضو گروه 
+               باشدیکسری اختیارات را دارد
+               etc و حالا این گروه درون فولدر 
+
+ root@b9aa3fdc6bfd:/# cat /etc/group : 
+                                   root:x:0:
+                                   daemon:x:1:
+                                   bin:x:2:
+                                   sys:x:3:
+                                   adm:x:4:ubuntu
+                                   tty:x:5:
+                                   disk:x:6:
+                                   lp:x:7:
+                                   mail:x:8:
+                                   news:x:9:
+                                   uucp:x:10:
+                                   man:x:12:
+                                   proxy:x:13:
+                                   kmem:x:15:
+                                   dialout:x:20:ubuntu
+                                   fax:x:21:
+                                   voice:x:22:
+                                   cdrom:x:24:ubuntu
+                                   floppy:x:25:ubuntu
+                                   tape:x:26:
+                                   sudo:x:27:ubuntu
+                                   audio:x:29:ubuntu
+                                   dip:x:30:ubuntu
+                                   www-data:x:33:
+                                   backup:x:34:
+                                   operator:x:37:
+                                   list:x:38:
+                                   irc:x:39:
+                                   src:x:40:
+                                   shadow:x:42:
+                                   utmp:x:43:
+                                   video:x:44:ubuntu
+                                   sasl:x:45:
+                                   plugdev:x:46:ubuntu
+                                   staff:x:50:
+                                   games:x:60:
+                                   users:x:100:
+                                   nogroup:x:65534:
+                                   ubuntu:x:1000:
+                                   developers:x:1001:
+
+------------------------------
+  برای اضافه کردن کاربر به گروه : 
+                                 usermod -G developers ayin
+
+   نمایش لیست گروه هایی که یک یوزر بهش متعلق است : 
+                                                      root@b9aa3fdc6bfd:/# groups ayin
+                                                      ayin : ayin developers
+                                                                               
+
+ -----------------------------------------------------permission-------------------------------------------------------------                                                                              
+
+
+ root@b9aa3fdc6bfd:/# ls
+                          bin   combined.txt  etc        files_overview.txt  home  lib64  mnt  proc  run   srv  tmp  var
+                         boot  dev           file1.txt  filw2.txt           lib   media  opt  root  sbin  sys  usr
+root@b9aa3fdc6bfd:/# cd /home
+root@b9aa3fdc6bfd:/home# ls
+ayin  ubuntu
+
+       sh خب میخواهیم فایلی ایجاد کنیم با پسوند  : 
+                                                   داشته باشند sh  به فایل هایی پسوند  
+                                                   گفته میشود shellScrip 
+                                                   excute و میتوانیم این فایل هارا 
+                                                   واجرا کنیم
+                                                   و درون ان هرکامند لینوکسی را که میخواهیم بنویسیم
+                                                   یک محتوا درون این فایل درج کردیم : 
+echo echo hello > deploy.sh : 
+
+              root@b9aa3fdc6bfd:/home# ls
+                                          ayin  deploy.sh  ubuntu
+
+              root@b9aa3fdc6bfd:/home# cat deploy.sh
+
+                                          echo hello
+
+                     ls -l : برای مشاهده پرمیشن های فایل
+                           باشد فایل d  اگر یا  
+                           - باید فایل است
+
+                     root@b9aa3fdc6bfd:/home# ls -l
+                            total 12
+                            drwxr-x--- 2 ayin   ayin   4096 Sep 16 07:53 ayin  folder
+                            -rw-r--r-- 1 root   root     11 Sep 16 08:11 deploy.sh file
+                            drwxr-x--- 2 ubuntu ubuntu 4096 Aug  5 02:14 ubuntu folder
+
+     chmod u+x deploy.sh : 
+                            یعنی به یوزری که این فایل بهش تعلق داره
+                              رو بهش بدهexcut  پرمیشن
+                              حالا زمانی که میخواستیم این پرمیشن را از ان بگیریم
+                              u-x
+                              به این صورت ان را کم میکردیم
+                              
